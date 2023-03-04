@@ -339,7 +339,7 @@ const sendInvoice = (chatId, language_code) => {
             },
         ],
         {
-            photo_url: "https://telegra.ph/payment-03-04",
+            photo_url: "https://blog.maxsoft.tk/AI.png",
             need_name: false,
             need_phone_number: false,
             need_email: false,
