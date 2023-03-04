@@ -112,6 +112,21 @@ bot.on("message", async (msg) => {
         trial[chatId] = (trial[chatId] ?? 0) + 1;
         writeTrial(trial);
 
+        if (!(new Date(opened[chatId]) > new Date())) {
+            bot.sendMessage(
+                chatId,
+                msg.from?.language_code == "ru"
+                    ? `Полная функциональность появится после оплаты ❤️ Приглашаем вас присоединиться к нашей группе и попробовать бота в ней 😊 ${process.env.GROUP_RU}`
+                    : `Full functionality will appear after payment ❤️ We invite you to join our group to try the bot 😊 ${process.env.GROUP_EN}`
+            )
+                .then(() => {})
+                .catch((e) => {
+                    console.error(e.message);
+                });
+            sendInvoice(chatId, msg.from?.language_code);
+            return;
+        }
+
         if (
             !PROMO.includes(String(chatId)) &&
             ((chatId > 0 && money[chatId] > MAX_MONEY) || (chatId < 0 && money[chatId] > MAX_GROUP_MONEY))
