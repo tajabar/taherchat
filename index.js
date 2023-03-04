@@ -64,7 +64,7 @@ const count = {};
 bot.on("pre_checkout_query", async (query) => {
     if (query.total_amount < PRICE * 100) {
         bot.answerPreCheckoutQuery(query.id, false, {
-            error_message: "Please update invoice using /payment command 😊",
+            error_message: "يرجى تحديث الفاتورة باستخدام /payment أمر 😊",
         });
         return;
     }
@@ -95,7 +95,7 @@ bot.on("message", async (msg) => {
                 msg.successful_payment.invoice_payload ?? chatId,
                 msg.from?.language_code == "ru"
                     ? "Оплата произведена! Спасибо. Бот теперь доступен на один месяц ❤️"
-                    : "Payment complete! Thank you. This bot is now available for a period of one month ❤️"
+                    : "اكتمل الدفع! شكرا لك. هذا الروبوت متاح الآن لمدة شهر واحد ❤️"
             );
             bot.sendMessage(
                 process.env.ADMIN_ID,
@@ -117,7 +117,7 @@ bot.on("message", async (msg) => {
                 chatId,
                 msg.from?.language_code == "ru"
                     ? `Полная функциональность появится после оплаты ❤️ Приглашаем вас присоединиться к нашей группе и попробовать бота в ней 😊 ${process.env.GROUP_RU}`
-                    : `Full functionality will appear after payment ❤️ We invite you to join our group to try the bot 😊 ${process.env.GROUP_EN}`
+                    : `ستظهر الوظائف الكاملة بعد الدفع ❤️ ندعوك للانضمام إلى مجموعتنا لتجربة الروبوت😊 ${process.env.GROUP_EN}`
             )
                 .then(() => {})
                 .catch((e) => {
@@ -130,16 +130,16 @@ bot.on("message", async (msg) => {
             !PROMO.includes(String(chatId)) &&
             ((chatId > 0 && money[chatId] > MAX_MONEY) || (chatId < 0 && money[chatId] > MAX_GROUP_MONEY))
         ) {
-            console.error("Abuse detected for paid account", chatId);
+            console.error("تم اكتشاف إساءة الاستخدام للحساب المدفوع", chatId);
             bot.sendMessage(
                 chatId,
                 msg.from?.language_code == "ru"
                     ? "Привет! К сожалению, вы превысили лимит запросов 😏 Это не проблема - вы всегда можете приобрести новую подписку! ❤️"
-                    : "Hello! Unfortunately, you have exceeded your subscription request count 😏 That's not a problem - you can always purchase a new one! ❤️"
+                    : "مرحبا! لسوء الحظ، لقد تجاوزت عدد طلبات الاشتراك 😏 هذه ليست مشكلة - يمكنك دائما شراء واحدة جديدة! ❤️"
             );
             bot.sendMessage(
                 process.env.ADMIN_ID,
-                "Abuse detected for paid account " + chatId + " trials= " + trial[chatId] + " money= " + money[chatId]
+                "تم اكتشاف إساءة الاستخدام للحساب المدفوع " + chatId + " المحاكمات= " + trial[chatId] + " أموال= " + money[chatId]
             );
             trial[chatId] = 0;
             opened[chatId] = new Date();
@@ -192,7 +192,7 @@ const processCommand = (chatId, msg, language_code) => {
             chatId,
             language_code == "ru"
                 ? "Нарисуй <что-то>\nЗагугли/Погугли <что-то>\nСброс\nТемпература 36.5 - 41.5\nПропуск <x>\nОтвечай\nРежим <притворись что ты ...>\nЧерез английский <запрос>\n/payment\n/terms\n/terms_group\n/status\n/support"
-                : "Paint <some>\nDraw <some>\nGoogle <some>\nReset\nTemperature 36.5 - 41.5\nSkip <x>\nAnswer\nMode <pretend you are ...>\n/payment\n/terms\n/terms_group\n/status\n/support"
+                : "Paint(طلاء)<someبعض>\nDraw(رسم) <someبعض>\nGoogle كوكل<someبعض>\nReset(تفريغ)\nTemperature(درجة الحرارة)36.5 - 41.5\nSkip(تخطي) <x>\nAnswer(اجابة)\nMode(وضع) <تظاهر بأنك ...>\n/payment\n/terms\n/terms_group\n/status\n/support"
         );
         return true;
     }
@@ -201,7 +201,7 @@ const processCommand = (chatId, msg, language_code) => {
             chatId,
             language_code == "ru"
                 ? `Привет! Я ChatGPT бот. Я могу говорить с вами на любом языке. Я могу нарисовать все что вы хотите. Вы также можете отправить мне изображение, и я переведу его в текст. Я могу искать в Google любую информацию, которая вам нужна. Используйте /help для списка команд 😊 \n\nНаша группа: ${process.env.GROUP_RU}`
-                : `Hello! I'm ChatGPT. Feel free to speak to me in any language. I can Paint <anything> you want. You can also send me an image, and I will translate it to text. I can search Google for any information you need. Use /help for more options 😊 \n\nJoin our group: ${process.env.GROUP_EN}`
+                : `مرحبا! أنا ChatGPT. لا تتردد في التحدث معي بأي لغة. يمكنني أن أرسم <أي شيء> تريده. يمكنك أيضا أن ترسل لي صورة، وسأترجمها إلى نص. يمكنني البحث في جوجل عن أي معلومات تحتاجها. استخدم /help لمزيد من الخيارات 😊 \n\nانضم إلى مجموعتنا لكي  تجرب البوت: ${process.env.GROUP_EN}\n\n للمزيد من مساعدة راسل مطور البوت:@ta_ja199 `
         );
         return true;
     }
@@ -210,7 +210,7 @@ const processCommand = (chatId, msg, language_code) => {
             chatId,
             language_code == "ru"
                 ? `После оплаты подписки $${GROUP_PRICE} вы можете использовать все функции ChatGPT бота в течение месяца для всей группы (без ограничения количества людей), включая Нарисуй, Загугли, и другие.`
-                : `After making a payment of $${GROUP_PRICE}, you will have access to the ChatGPT bot for one month for entire group (unlimited numer of people), with full features (including Paint, Photo2Text, Google, and more)`
+                : `بعد إجراء دفعة من $${GROUP_PRICE}, ستتمكن من الوصول إلى روبوت ChatGPT لمدة شهر واحد للمجموعة بأكملها (unlimited numer of people), with full features (including Paint, Photo2Text, Google, and more)`
         );
         return true;
     }
