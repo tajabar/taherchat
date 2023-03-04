@@ -354,7 +354,7 @@ const sendInvoice = (chatId, language_code) => {
             },
         ],
         {
-            photo_url: "https://blog.maxsoft.tk/AI.png",
+            photo_url: "https://www.linkpicture.com/q/%D8%B5%D9%88%D8%B1%D8%A9-PNG.png",
             need_name: false,
             need_phone_number: false,
             need_email: false,
