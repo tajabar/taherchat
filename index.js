@@ -192,7 +192,7 @@ const processCommand = (chatId, msg, language_code) => {
             chatId,
             language_code == "ru"
                 ? "Нарисуй <что-то>\nЗагугли/Погугли <что-то>\nСброс\nТемпература 36.5 - 41.5\nПропуск <x>\nОтвечай\nРежим <притворись что ты ...>\nЧерез английский <запрос>\n/payment\n/terms\n/terms_group\n/status\n/support"
-                : "Paint(طلاء)<someبعض>\nDraw(رسم) <someبعض>\nGoogle كوكل<someبعض>\nReset(تفريغ)\nTemperature(درجة الحرارة)36.5 - 41.5\nSkip(تخطي) <x>\nAnswer(اجابة)\nMode(وضع) <تظاهر بأنك ...>\n/payment\n/terms\n/terms_group\n/status\n/support"
+                : "Paint(طلاء)<someبعض>\nDraw(رسم) <فقط انكليزي>\nGoogle كوكل<someبعض>\nReset(تفريغ)\nTemperature(درجة الحرارة)36.5 - 41.5\nSkip(تخطي) <x>\nAnswer(اجابة)\nMode(وضع) <تظاهر بأنك ...>\n/payment\n/terms\n/terms_group\n/status\n/support"
         );
         return true;
     }
@@ -210,7 +210,7 @@ const processCommand = (chatId, msg, language_code) => {
             chatId,
             language_code == "ru"
                 ? `После оплаты подписки $${GROUP_PRICE} вы можете использовать все функции ChatGPT бота в течение месяца для всей группы (без ограничения количества людей), включая Нарисуй, Загугли, и другие.`
-                : `بعد إجراء دفعة من $${GROUP_PRICE}, ستتمكن من الوصول إلى روبوت ChatGPT لمدة شهر واحد للمجموعة بأكملها (unlimited numer of people), with full features (including Paint, Photo2Text, Google, and more)`
+                : `بعد إجراء دفعة من $${GROUP_PRICE}, ستتمكن من الوصول إلى روبوت ChatGPT لمدة شهر واحد للمجموعة بأكملها  (عدد غير محدود من الأشخاص) ، مع ميزات كاملة (بما في ذلك الطلاء ، نص الصورة 2 ، Google ، وأكثر)`
         );
         return true;
     }
@@ -219,7 +219,7 @@ const processCommand = (chatId, msg, language_code) => {
             chatId,
             language_code == "ru"
                 ? `После оплаты подписки $${PRICE} в течение месяца вы можете использовать все функции бота, включая Нарисуй, Загугли, и другие без каких-либо ограничений`
-                : `After making a payment of $${PRICE}, you will have access to the ChatGPT bot for one month, with full features (including Paint, Photo2Text, Google, and more) without any limitations`
+                : `بعد إجراء دفعة من $${PRICE}, ستتمكن من الوصول إلى روبوت ChatGPT لمدة شهر واحد، مع ميزات كاملة (بما في ذلك Paint وPhoto2Text وGoogle والمزيد) دون أي قيود`
         );
         return true;
     }
@@ -233,7 +233,7 @@ const processCommand = (chatId, msg, language_code) => {
             chatId,
             language_code == "ru"
                 ? `Если у вас возникли проблемы с оплатой, пожалуйста, напишите мне в личные сообщения @${process.env.ADMIN}`
-                : `For any inquiries regarding refunds and cancellations please contact @${process.env.ADMIN}`
+                : `لأي استفسارات تتعلق بالمبالغ المستردة والإلغاءات، يرجى الاتصال @${process.env.ADMIN}`
         );
         return true;
     }
@@ -249,8 +249,8 @@ const processCommand = (chatId, msg, language_code) => {
                     ? "Ваша подписка активна до " + opened[chatId]
                     : "У вас нет подписки"
                 : opened[chatId] && new Date(opened[chatId]) > new Date()
-                ? "You have an active subscription until " + opened[chatId]
-                : "You have no subscription"
+                ? "لديك اشتراك نشط حتى " + opened[chatId]
+                : "ليس لديك اشتراك"
         );
         return true;
     }
@@ -271,7 +271,7 @@ const processCommand = (chatId, msg, language_code) => {
     if (msg.startsWith("пропуск ")) {
         skip[chatId] = +msg.slice(8);
         writeSkip(skip);
-        bot.sendMessage(chatId, "Отвечать раз в " + skip[chatId]);
+        bot.sendMessage(chatId, "قم بالرد مرة واحدة " + skip[chatId]);
         return true;
     }
     if (msg.startsWith("skip ")) {
@@ -283,7 +283,7 @@ const processCommand = (chatId, msg, language_code) => {
     if (msg.startsWith("отвечать раз в ")) {
         skip[chatId] = +msg.slice(15);
         writeSkip(skip);
-        bot.sendMessage(chatId, "Отвечать раз в " + skip[chatId]);
+        bot.sendMessage(chatId, "قم بالرد مرة واحدة " + skip[chatId]);
         return true;
     }
 
@@ -326,7 +326,7 @@ const processCommand = (chatId, msg, language_code) => {
     if (msg.startsWith("temperature ")) {
         temp[chatId] = +msg.slice(12)?.replace(",", ".");
         writeTemp(temp);
-        bot.sendMessage(chatId, "Temperature set to " + temp[chatId]);
+        bot.sendMessage(chatId, "تم ضبط درجة الحرارة على " + temp[chatId]);
         return true;
     }
 };
@@ -334,8 +334,8 @@ const processCommand = (chatId, msg, language_code) => {
 const sendInvoice = (chatId, language_code) => {
     bot.sendInvoice(
         chatId,
-        language_code == "ru" ? "Требуется оплата" : "Need payment",
-        language_code == "ru" ? "Подписка ChatGPT на 1 месяц" : "1-month access to ChatGPT",
+        language_code == "ru" ? "Требуется оплата" : "أحتاج إلى الدفع",
+        language_code == "ru" ? "Подписка ChatGPT на 1 месяц" : "الوصول لمدة شهر واحد إلى ChatGPT",
         chatId,
         process.env.STRIPE_KEY,
         "USD",
@@ -345,10 +345,10 @@ const sendInvoice = (chatId, language_code) => {
                     chatId > 0
                         ? language_code == "ru"
                             ? "Полный доступ к P2P чату"
-                            : "full access to P2P chat"
+                            : "الوصول الكامل إلى دردشة P2P"
                         : language_code == "ru"
                         ? "Полный доступ к групповому чату"
-                        : "full access to GROUP chat",
+                        : "الوصول الكامل إلى الدردشة الجماعية",
                 amount: chatId > 0 ? PRICE * 100 : GROUP_PRICE * 100,
             },
         ],
@@ -415,7 +415,7 @@ const textToVisual = async (chatId, text, language_code) => {
         text +
             (text?.startsWith("draw")
                 ? ""
-                : ", deep focus, highly detailed, digital painting, artstation, 4K, smooth, sharp focus, illustration")
+                : ", تركيز عميق، مفصل للغاية، لوحة رقمية، محطة فنية، 4K، تركيز سلس وحاد، توضيح")
     );
     if (photo) {
         money[chatId] = (money[chatId] ?? 0) + IMAGE_PRICE;
