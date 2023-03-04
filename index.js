@@ -193,7 +193,7 @@ const processCommand = (chatId, msg, language_code) => {
             chatId,
             language_code == "ru"
                 ? "Нарисуй <что-то>\nЗагугли/Погугли <что-то>\nСброс\nТемпература 36.5 - 41.5\nПропуск <x>\nОтвечай\nРежим <притворись что ты ...>\nЧерез английский <запрос>\n/payment\n/terms\n/terms_group\n/status\n/support"
-                : "Paint(طلاء)<someبعض>\nDraw(رسم) <فقط انكليزي>\nGoogle كوكل<someبعض>\nReset(تفريغ)\nTemperature(درجة الحرارة)36.5 - 41.5\nSkip(تخطي) <x>\nAnswer(اجابة)\nMode(وضع) <تظاهر بأنك ...>\n/payment\n/terms\n/terms_group\n/status\n/support"
+                : "Paint(طلاء)<someبعض>\nDraw(رسم) <فقط انكليزي>\nGoogle كوكل<someبعض>\nتنضيف\nTemperature(درجة الحرارة)36.5 - 41.5\nSkip(تخطي) <x>\nAnswer(اجابة)\nMode(وضع) <تظاهر بأنك ...>\n/payment\n/terms\n/terms_group\n/status\n/support"
         );
         return true;
     }
@@ -202,7 +202,7 @@ const processCommand = (chatId, msg, language_code) => {
             chatId,
             language_code == "ru"
                 ? `Привет! Я ChatGPT бот. Я могу говорить с вами на любом языке. Я могу нарисовать все что вы хотите. Вы также можете отправить мне изображение, и я переведу его в текст. Я могу искать в Google любую информацию, которая вам нужна. Используйте /help для списка команд 😊 \n\nНаша группа: ${process.env.GROUP_RU}`
-                : `مرحبا! أنا ChatGPT. لا تتردد في التحدث معي بأي لغة. يمكنني أن أرسم <أي شيء> تريده. يمكنك أيضا أن ترسل لي صورة، وسأترجمها إلى نص. يمكنني البحث في جوجل عن أي معلومات تحتاجها. استخدم /help لمزيد من الخيارات 😊 \n\nانضم إلى مجموعتنا لكي  تجرب البوت: ${process.env.GROUP_EN}\n\n للمزيد من مساعدة راسل مطور البوت:@ta_ja199 `
+                : `مرحبا! أنا ChatGPT. لا تتردد في التحدث معي بأي لغة. يمكنني أن أرسم <أي شيء> تريده. يمكنك أيضا أن ترسل لي صورة، وسأترجمها إلى نص. يمكنني البحث في جوجل عن أي معلومات تحتاجها. استخدم /help لمزيد من الخيارات 😊 \n\nانظم للمجموعة لكي يعمل البوت معك مجاناً: ${process.env.GROUP_EN}\n\n للمزيد من مساعدة راسل مطور البوت:@ta_ja199 `
         );
         return true;
     }
@@ -262,8 +262,8 @@ const processCommand = (chatId, msg, language_code) => {
         writeChatSuffix(chatSuffix);
         return true;
     }
-    if (msg === "reset") {
-        bot.sendMessage(chatId, "Context cleared");
+    if (msg === "تنضيف") {
+        bot.sendMessage(chatId, "تنضيف محتويات");
         context[chatId] = "";
         chatSuffix[chatId] = "";
         writeChatSuffix(chatSuffix);
@@ -302,18 +302,18 @@ const processCommand = (chatId, msg, language_code) => {
         bot.sendMessage(chatId, "Режим установлен");
         return true;
     }
-    if (msg === "mode" || msg === "mode usual") {
+    if (msg === "mode" || msg === "الوضع المعتاد") {
         chatSuffix[chatId] = "";
         context[chatId] = "";
         writeChatSuffix(chatSuffix);
-        bot.sendMessage(chatId, "Usual mode");
+        bot.sendMessage(chatId, "الوضع المعتاد");
         return true;
     }
     if (msg.startsWith("mode ")) {
         chatSuffix[chatId] = "(" + msg?.substring(5, 100) + ")";
         context[chatId] = "";
         writeChatSuffix(chatSuffix);
-        bot.sendMessage(chatId, "Mode set");
+        bot.sendMessage(chatId, "تم ضبط الوضع");
         return true;
     }
 
@@ -335,8 +335,8 @@ const processCommand = (chatId, msg, language_code) => {
 const sendInvoice = (chatId, language_code) => {
     bot.sendInvoice(
         chatId,
-        language_code == "ru" ? "Требуется оплата" : "أحتاج إلى الدفع",
-        language_code == "ru" ? "Подписка ChatGPT на 1 месяц" : "الوصول لمدة شهر واحد إلى ChatGPT",
+        language_code == "ru" ? "Требуется оплата" : "تحتاج الى دفع ",
+        language_code == "ru" ? "Подписка ChatGPT на 1 месяц" : "الوصول لمدة شهر واحد إلى ChatGPT\n راسل مطور قبل دفع:@ta_ja199",
         chatId,
         process.env.STRIPE_KEY,
         "USD",
@@ -346,7 +346,7 @@ const sendInvoice = (chatId, language_code) => {
                     chatId > 0
                         ? language_code == "ru"
                             ? "Полный доступ к P2P чату"
-                            : "الوصول الكامل إلى دردشة P2P"
+                            : "الوصول الكامل إلى دردشة مع البوت"
                         : language_code == "ru"
                         ? "Полный доступ к групповому чату"
                         : "الوصول الكامل إلى الدردشة الجماعية",
