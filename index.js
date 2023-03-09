@@ -93,7 +93,7 @@ bot.on("message", async (msg) => {
             writeOpened(opened);
             bot.sendMessage(
                 msg.successful_payment.invoice_payload ?? chatId,
-                msg.from?.language_code == "ar"
+                msg.from?.language_code == "ru"
                     ? "Оплата произведена! Спасибо. Бот теперь доступен на один месяц ❤️"
                     : "اكتمل الدفع! شكرا لك. هذا الروبوت متاح الآن لمدة شهر واحد ❤️"
             );
@@ -115,7 +115,7 @@ bot.on("message", async (msg) => {
         if (!(new Date(opened[chatId]) > new Date())) {
             bot.sendMessage(
                 chatId,
-                msg.from?.language_code == "ar"
+                msg.from?.language_code == "ru"
                     ? `Полная функциональность появится после оплаты ❤️ Приглашаем вас присоединиться к нашей группе и попробовать бота в ней 😊 ${process.env.GROUP_RU}`
                     : `لكي تستعمل البوت في خاص يجيب عليك ان تدفع ❤️🤓 ويمكنك تجربة بوت مجاناً في مجموعة ${process.env.GROUP_EN} \n طلب تنصيب للبوت خاص راسل:@ta_ja199`
             )
@@ -134,7 +134,7 @@ bot.on("message", async (msg) => {
             console.error("تم اكتشاف إساءة الاستخدام للحساب المدفوع", chatId);
             bot.sendMessage(
                 chatId,
-                msg.from?.language_code == "ar"
+                msg.from?.language_code == "ru"
                     ? "Привет! К сожалению, вы превысили лимит запросов 😏 Это не проблема - вы всегда можете приобрести новую подписку! ❤️"
                     : "مرحبا! لسوء الحظ، لقد تجاوزت عدد طلبات الاشتراك 😏 هذه ليست مشكلة - يمكنك دائما شراء واحدة جديدة! ❤️"
             );
@@ -191,7 +191,7 @@ const processCommand = (chatId, msg, language_code) => {
     if (msg.startsWith("/command") || msg.startsWith("/help")) {
         bot.sendMessage(
             chatId,
-            language_code == "ar"
+            language_code == "ru"
                 ? "Нарисуй <что-то>\nЗагугли/Погугли <что-то>\nСброс\nТемпература 36.5 - 41.5\nПропуск <x>\nОтвечай\nРежим <притворись что ты ...>\nЧерез английский <запрос>\n/payment\n/terms\n/terms_group\n/status\n/support"
                 : "Paint(طلاء)<لطلاء رسمه ما>\nDraw(رسم) <فقط انكليزي>\nGoogle كوكل<someبعض>\nتنضيف\nTemperature(درجة الحرارة)36.5 - 41.5\nSkip(تخطي) <x>\nAnswer(اجابة)\nMode(وضع) <تظاهر بأنك ...>\n/payment\n/terms\n/terms_group\n/status\n/support"
         );
@@ -200,7 +200,7 @@ const processCommand = (chatId, msg, language_code) => {
     if (msg.startsWith("/start")) {
         bot.sendMessage(
             chatId,
-            language_code == "ar"
+            language_code == "ru"
                 ? `Привет! Я ChatGPT бот. Я могу говорить с вами на любом языке. Я могу нарисовать все что вы хотите. Вы также можете отправить мне изображение, и я переведу его в текст. Я могу искать в Google любую информацию, которая вам нужна. Используйте /help для списка команд 😊 \n\nНаша группа: ${process.env.GROUP_RU}`
                 : `مرحبا! أنا ChatGPT. لا تتردد في التحدث معي بأي لغة. يمكنني أن أرسم <أي شيء> تريده. يمكنك أيضا أن ترسل لي صورة، وسأترجمها إلى نص. يمكنني البحث في جوجل عن أي معلومات تحتاجها. استخدم /help لمزيد من الخيارات 😊 \n\nانظم للمجموعة لكي يعمل البوت معك مجاناً: ${process.env.GROUP_EN}\n\n للمزيد من مساعدة راسل مطور البوت:@ta_ja199 `
         );
@@ -209,7 +209,7 @@ const processCommand = (chatId, msg, language_code) => {
     if (msg.startsWith("/terms_group")) {
         bot.sendMessage(
             chatId,
-            language_code == "ar"
+            language_code == "ru"
                 ? `После оплаты подписки $${GROUP_PRICE} вы можете использовать все функции ChatGPT бота в течение месяца для всей группы (без ограничения количества людей), включая Нарисуй, Загугли, и другие.`
                 : `بعد إجراء دفعة من $${GROUP_PRICE}, ستتمكن من الوصول إلى روبوت ChatGPT لمدة شهر واحد للمجموعة بأكملها  (عدد غير محدود من الأشخاص) ، مع ميزات كاملة (بما في ذلك الطلاء ، نص الصورة 2 ، Google ، وأكثر)`
         );
@@ -218,7 +218,7 @@ const processCommand = (chatId, msg, language_code) => {
     if (msg.startsWith("/terms")) {
         bot.sendMessage(
             chatId,
-            language_code == "ar"
+            language_code == "ru"
                 ? `После оплаты подписки $${PRICE} в течение месяца вы можете использовать все функции бота, включая Нарисуй, Загугли, и другие без каких-либо ограничений`
                 : `بعد إجراء دفعة من $${PRICE}, ستتمكن من الوصول إلى روبوت ChatGPT لمدة شهر واحد، مع ميزات كاملة (بما في ذلك Paint وPhoto2Text وGoogle والمزيد) دون أي قيود`
         );
@@ -232,7 +232,7 @@ const processCommand = (chatId, msg, language_code) => {
     if (msg.startsWith("/support")) {
         bot.sendMessage(
             chatId,
-            language_code == "ar"
+            language_code == "ru"
                 ? `Если у вас возникли проблемы с оплатой, пожалуйста, напишите мне в личные сообщения @${process.env.ADMIN}`
                 : `لأي استفسارات تتعلق بالمبالغ المستردة والإلغاءات، يرجى الاتصال @${process.env.ADMIN}`
         );
@@ -245,7 +245,7 @@ const processCommand = (chatId, msg, language_code) => {
     if (msg.startsWith("/status")) {
         bot.sendMessage(
             chatId,
-            language_code == "ar"
+            language_code == "ru"
                 ? opened[chatId] && new Date(opened[chatId]) > new Date()
                     ? "Ваша подписка активна до " + opened[chatId]
                     : "У вас нет подписки"
@@ -335,8 +335,8 @@ const processCommand = (chatId, msg, language_code) => {
 const sendInvoice = (chatId, language_code) => {
     bot.sendInvoice(
         chatId,
-        language_code == "ar" ? "Требуется оплата" : "تحتاج الى دفع ",
-        language_code == "ar" ? "Подписка ChatGPT на 1 месяц" : "الوصول لمدة شهر واحد إلى ChatGPT\n راسل مطور قبل دفع:@ta_ja199",
+        language_code == "ru" ? "Требуется оплата" : "تحتاج الى دفع ",
+        language_code == "ru" ? "Подписка ChatGPT на 1 месяц" : "الوصول لمدة شهر واحد إلى ChatGPT\n راسل مطور قبل دفع:@ta_ja199",
         chatId,
         process.env.STRIPE_KEY,
         "USD",
@@ -344,10 +344,10 @@ const sendInvoice = (chatId, language_code) => {
             {
                 label:
                     chatId > 0
-                        ? language_code == "ar"
+                        ? language_code == "ru"
                             ? "Полный доступ к P2P чату"
                             : "الوصول الكامل إلى دردشة مع البوت"
-                        : language_code == "ar"
+                        : language_code == "ru"
                         ? "Полный доступ к групповому чату"
                         : "الوصول الكامل إلى الدردشة الجماعية",
                 amount: chatId > 0 ? PRICE * 100 : GROUP_PRICE * 100,
@@ -384,8 +384,8 @@ const visualToText = async (chatId, msg) => {
         writeMoney(money);
         bot.sendChatAction(chatId, "typing");
         last[chatId] = prompt;
-        if (msg.from?.language_code == "ar") {
-            prompt = await translate(prompt, "ar");
+        if (msg.from?.language_code == "ru") {
+            prompt = await translate(prompt, "ru");
         }
         if (prompt) {
             context[chatId] = context[chatId] + prompt;
@@ -405,7 +405,7 @@ const textToVisual = async (chatId, text, language_code) => {
         // link between right and left hemisphere (painting)
         text = last[chatId]?.replace("child", "");
     }
-    if ((language_code == "ar" && !text?.startsWith("draw")) || text?.startsWith("ارسم")) {
+    if ((language_code == "ru" && !text?.startsWith("draw")) || text?.startsWith("ارسم")) {
         text = await translate(text?.replace("ارسم", ""), "en");
     }
     if (!text) {
