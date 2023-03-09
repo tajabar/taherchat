@@ -174,7 +174,7 @@ bot.on("message", async (msg) => {
         if (msgL.startsWith("погугли") || msgL.startsWith("загугли") || msgL.startsWith("google")) {
             textToGoogle(chatId, msg.text.slice(7), msg.from?.language_code);
         } else {
-            if (msgL.startsWith("нарисуй") || msgL.startsWith("draw") || msgL.startsWith("paint")) {
+            if (msgL.startsWith("ارسم") || msgL.startsWith("draw") || msgL.startsWith("paint")) {
                 // visual hemisphere (left)
                 textToVisual(chatId, msgL, msg.from?.language_code);
             } else {
