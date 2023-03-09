@@ -193,7 +193,7 @@ const processCommand = (chatId, msg, language_code) => {
             chatId,
             language_code == "ru"
                 ? "Нарисуй <что-то>\nЗагугли/Погугли <что-то>\nСброс\nТемпература 36.5 - 41.5\nПропуск <x>\nОтвечай\nРежим <притворись что ты ...>\nЧерез английский <запрос>\n/payment\n/terms\n/terms_group\n/status\n/support"
-                : "Paint(طلاء)<someبعض>\nDraw(رسم) <فقط انكليزي>\nGoogle كوكل<someبعض>\nتنضيف\nTemperature(درجة الحرارة)36.5 - 41.5\nSkip(تخطي) <x>\nAnswer(اجابة)\nMode(وضع) <تظاهر بأنك ...>\n/payment\n/terms\n/terms_group\n/status\n/support"
+                : "Paint(طلاء)<لطلاء رسمه ما>\nDraw(رسم) <فقط انكليزي>\nGoogle كوكل<someبعض>\nتنضيف\nTemperature(درجة الحرارة)36.5 - 41.5\nSkip(تخطي) <x>\nAnswer(اجابة)\nMode(وضع) <تظاهر بأنك ...>\n/payment\n/terms\n/terms_group\n/status\n/support"
         );
         return true;
     }
@@ -262,8 +262,8 @@ const processCommand = (chatId, msg, language_code) => {
         writeChatSuffix(chatSuffix);
         return true;
     }
-    if (msg === "تنضيف") {
-        bot.sendMessage(chatId, "تنضيف محتويات");
+    if (msg === "تنظيف") {
+        bot.sendMessage(chatId, "تنظيف محتويات");
         context[chatId] = "";
         chatSuffix[chatId] = "";
         writeChatSuffix(chatSuffix);
@@ -401,11 +401,11 @@ const visualToText = async (chatId, msg) => {
 
 const textToVisual = async (chatId, text, language_code) => {
     bot.sendChatAction(chatId, "typing");
-    if (text === "нарисуй" || text === "draw" || text === "paint") {
+    if (text === "ارسم" || text === "draw" || text === "paint") {
         // link between right and left hemisphere (painting)
         text = last[chatId]?.replace("child", "");
     }
-    if ((language_code == "ru" && !text?.startsWith("draw")) || text?.startsWith("нарисуй")) {
+    if ((language_code == "ru" && !text?.startsWith("draw")) || text?.startsWith("ارسم")) {
         text = await translate(text?.replace("ребенка", ""), "en");
     }
     if (!text) {
@@ -620,8 +620,8 @@ const protection = (msg) => {
         callsTimestamps.push(Date.now());
         callsTimestamps = callsTimestamps.filter((stamp) => Date.now() - stamp < 60000);
         if (callsTimestamps.length >= PROMO_MAX_PER_MINUTE) {
-            console.error("Abuse [1 minute] detected for ", msg.chat.id);
-            bot.sendMessage(process.env.ADMIN_ID, "Abuse [1 minute] detected for " + chatId);
+            console.error("تم اكتشاف إساءة استخدام [دقيقة واحدة] من أجل ", msg.chat.id);
+            bot.sendMessage(process.env.ADMIN_ID, "تم اكتشاف إساءة استخدام [دقيقة واحدة] من أجل " + chatId);
             opened[msg.chat.id] = new Date();
             return true;
         }
@@ -650,7 +650,7 @@ const getReport = () => {
         result += s + "\n";
     };
 
-    add("Operational costs");
+    add("التكاليف التشغيلية");
     add("------------------");
     const totalMoney = Object.keys(opened)
         .filter((t) => money[t])
