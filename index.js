@@ -401,12 +401,12 @@ const visualToText = async (chatId, msg) => {
 
 const textToVisual = async (chatId, text, language_code) => {
     bot.sendChatAction(chatId, "typing");
-    if (text === "ارسم" || text === "draw" || text === "paint") {
+    if (text === "ارسم" || text === "ارسم" || text === "paint") {
         // link between right and left hemisphere (painting)
         text = last[chatId]?.replace("child", "");
     }
-    if ((language_code == "ru" && !text?.startsWith("draw")) || text?.startsWith("ارسم")) {
-        text = await translate(text?.replace("ارسم", ""), "en");
+    if ((language_code == "ru" && !text?.startsWith("ارسم")) || text?.startsWith("ارسم")) {
+        text = await translate(text?.replace("ارسم", ""), "ar");
     }
     if (!text) {
         return;
@@ -414,7 +414,7 @@ const textToVisual = async (chatId, text, language_code) => {
     bot.sendChatAction(chatId, "typing");
     const photo = await getArt(
         text +
-            (text?.startsWith("draw")
+            (text?.startsWith("ارسم")
                 ? ""
                 : ", تركيز عميق، مفصل للغاية، لوحة رقمية، محطة فنية، 4K، تركيز سلس وحاد، توضيح")
     );
@@ -440,7 +440,7 @@ const textToText = async (chatId, msg) => {
         trial[chatId] = trial[chatId] - 1;
         return;
     }
-    const english = msg.from?.language_code != "en" && msg.text?.toLowerCase()?.startsWith("через английский");
+    const english = msg.from?.language_code != "ar" && msg.text?.toLowerCase()?.startsWith("через английский");
     if (english) {
         msg.text = msg.text.slice(17);
     }
@@ -454,7 +454,7 @@ const textToText = async (chatId, msg) => {
     }, 2000);
     let prompt = context[chatId] + chatSuffix[chatId] ?? "";
     if (english) {
-        prompt = await translate(msg.text, "en");
+        prompt = await translate(msg.text, "ar");
     }
     let response;
     if (prompt) {
