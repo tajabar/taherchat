@@ -174,7 +174,7 @@ bot.on("message", async (msg) => {
         if (msgL.startsWith("погугли") || msgL.startsWith("загугли") || msgL.startsWith("google")) {
             textToGoogle(chatId, msg.text.slice(7), msg.from?.language_code);
         } else {
-            if (msgL.startsWith("ارسم") || msgL.startsWith("draw") || msgL.startsWith("paint")) {
+            if (msgL.startsWith("нарисуй") || msgL.startsWith("draw") || msgL.startsWith("paint")) {
                 // visual hemisphere (left)
                 textToVisual(chatId, msgL, msg.from?.language_code);
             } else {
@@ -401,11 +401,11 @@ const visualToText = async (chatId, msg) => {
 
 const textToVisual = async (chatId, text, language_code) => {
     bot.sendChatAction(chatId, "typing");
-    if (text === "ارسم" || text === "draw" || text === "paint") {
+    if (text === "нарисуй" || text === "draw" || text === "paint") {
         // link between right and left hemisphere (painting)
         text = last[chatId]?.replace("child", "");
     }
-    if ((language_code == "ru" && !text?.startsWith("draw")) || text?.startsWith("ارسم")) {
+    if ((language_code == "ru" && !text?.startsWith("draw")) || text?.startsWith("нарисуй")) {
         text = await translate(text?.replace("draw", ""), "en");
     }
     if (!text) {
