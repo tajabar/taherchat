@@ -1,4 +1,4 @@
-# chatgpt
+# chatgpttaher
 
 Telegram Bot with OpenAI GPT-3.5-turbo connection, context, Stability AI painting and Google scraping
 
