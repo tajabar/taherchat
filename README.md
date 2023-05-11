@@ -1,4 +1,4 @@
-# chatgpttaher 2023/5/1
+# chatgpttaher 2023/5/1&11
 
 Telegram Bot with OpenAI GPT-3.5-turbo connection, context, Stability AI painting and Google scraping
 
