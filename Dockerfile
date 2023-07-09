@@ -1,10 +1,14 @@
-FROM node:lts-alpine
-ENV NODE_ENV=production
-WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json*", "./"]
-RUN npm install --production --silent && mv node_modules ../
-COPY *.js .
-RUN chown -R node /usr/src/app
-USER node
-CMD ["node", "index.js"]
+FROM python:3.8-slim-buster
+RUN mkdir /pdf && chmod 777 /pdf
 
+WORKDIR /pdf
+
+COPY dockerImage.txt dockerImage.txt
+RUN pip install --upgrade pip && pip install -r dockerImage.txt 
+
+RUN apt update && apt install -y ocrmypdf
+RUN apt install -y wkhtmltopdf
+
+COPY . .
+
+CMD python3 pdf.py
